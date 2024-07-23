@@ -18,6 +18,7 @@ left_paddle = LeftPaddle()
 
 # Player Paddle Controls
 left_paddle.controls(screen)
+right_paddle.controls(screen)
 
 # Set up Scoreboard
 scoreboard = Scoreboard()
