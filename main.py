@@ -25,8 +25,21 @@ is_game_on = True
 
 while is_game_on:
     screen.update()     # Turn on animations again after paddles are initialized in their proper positions
-    time.sleep(0.01)    # Add a small delay to prevent high CPU usage
-    ball.move()    # Starts moving the ball when game starts
+    time.sleep(0.01)    # Add a small delay
+    ball.move()         # Starts moving the ball when game starts
 
+    # Bounce ball when making contact with top or bottom walls
     if ball.ycor() > 280 or ball.ycor() < -280:
-        ball.bounce()
+        ball.bounce_y()
+
+    # Detect collision with right or left paddle
+    if ball.distance(right_paddle) < 50 and ball.xcor() > 330 or ball.distance(left_paddle) < 50 and ball.xcor() < -330:
+        ball.bounce_x()
+
+    # Detect when right paddle misses
+    if ball.xcor() > 390:
+        ball.reset_position()
+
+    # Detect when left paddle misses
+    if ball.xcor() < -390:
+        ball.reset_position()
