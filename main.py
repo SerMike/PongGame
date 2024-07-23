@@ -1,7 +1,9 @@
 from turtle import Screen
 from ball import Ball
 from paddle import RightPaddle, LeftPaddle
+from scoreboard import Scoreboard
 import time
+
 
 # Set up Screen
 screen = Screen()
@@ -16,6 +18,9 @@ left_paddle = LeftPaddle()
 
 # Player Paddle Controls
 left_paddle.controls(screen)
+
+# Set up Scoreboard
+scoreboard = Scoreboard()
 
 # Set up ball
 ball = Ball()
@@ -39,7 +44,14 @@ while is_game_on:
     # Detect when right paddle misses
     if ball.xcor() > 390:
         ball.reset_position()
+        scoreboard.left_point()     # Increases point score for left player
 
     # Detect when left paddle misses
     if ball.xcor() < -390:
         ball.reset_position()
+        scoreboard.right_point()    # Increases point score for right player
+
+    # Game Winner
+    if scoreboard.l_score >= 10 or scoreboard.r_score >= 10:
+        is_game_on = False
+        scoreboard.winning()
