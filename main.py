@@ -56,3 +56,5 @@ while is_game_on:
     if scoreboard.l_score >= 10 or scoreboard.r_score >= 10:
         is_game_on = False
         scoreboard.winning()
+
+screen.exitonclick()
